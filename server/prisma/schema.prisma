@@ -25,10 +25,16 @@ model User {
 model Task {
   id          String   @id @default(uuid())
   description String
+  status      Status @default(PENDING)
   user        User     @relation(fields: [userId], references: [id])
   userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@map("tasks")
+}
+
+enum Status {
+  PENDING
+  COMPLETED
 }
